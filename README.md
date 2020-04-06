@@ -49,4 +49,4 @@ This project is for the AnalyticsEngine
 
 `$ run java -jar AnalyticsProcessor-1.0.jar` in second terminal
 
-#### Once the above steps are completed you should be able to see Ingester producing Events to Kafka Message Bus and ProcessApp consuming and printing metris in logs.
+#### Once the above steps are completed you should be able to see Ingester producing Events to Kafka Message Bus and ProcessApp consuming and printing metris in console.
