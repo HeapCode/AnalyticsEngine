@@ -13,4 +13,6 @@ public class ApplicationConstants {
 	public static String PROCESS_APP_PORT = "com.heapcode.analytics.process.app.port";
 	public static String CLIENT_ID = "com.heapcode.anlaytics.rep.client_id";
 	public static String CLIENT_SECRET = "com.heapcode.anlaytics.rep.client_secret";
+	public static String KAFKA_TOPIC = "com.heapcode.anlaytics.kafka_topic";
+	public static String KAFKA_BROKERS = "com.heapcode.anlaytics.kafka_brokers";
 }
