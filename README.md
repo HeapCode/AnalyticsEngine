@@ -9,9 +9,9 @@ This project is for the AnalyticsEngine
 ### Steps for running installing and running Kafka
 - Download Kafka from the link https://kafka.apache.org/downloads
 - Create a folder Kafka in one of your drive such C:\Kafka
-- Extract the downlaoded Kafka archive into C:\kafka_2.12-2.4.1
+- Extract the downloaded Kafka archive into C:\kafka_2.12-2.4.1
 - Open Command Prompt
-- Go Kafka folder such as 
+- Go Kafka folder by 
 
 `$ cd C:\kafka_2.12-2.4.1\`
 - Start Zookeeper by 
