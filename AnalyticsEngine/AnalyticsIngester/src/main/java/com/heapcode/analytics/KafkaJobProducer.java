@@ -18,8 +18,6 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.streams.processor.internals.StreamsPartitionAssignor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,9 +33,7 @@ import com.heapcode.analytics.pojo.Event;
 public class KafkaJobProducer implements IJobQueue {
 	private static final Logger logger = LoggerFactory.getLogger(KafkaJobProducer.class);
 	private static int producerTimeOut = 5; // default value
-	
-	@Autowired
-	Environment environment;
+	private static final String defaultAcksMode = "-1";
 
 	/**
 	 * List of kafka servers. Should be in format
@@ -65,6 +61,9 @@ public class KafkaJobProducer implements IJobQueue {
 		// set default kafka properties
 		kafkaProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		kafkaProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+//		kafkaProperties.put(ProducerConfig.CLIENT_ID_CONFIG, "my-first-streams-application");
+//		kafkaProperties.put(StreamsConfig.APPLICATION_ID_CONFIG, "my-first-streams-application");
+//		kafkaProperties.put(ConsumerConfig.GROUP_ID_CONFIG, InsightsConfigConstants.KAFKA_CLIENT_ID_CONFIG);
 		kafkaProperties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG,
 				StreamsPartitionAssignor.class.getName());
 
@@ -85,6 +84,9 @@ public class KafkaJobProducer implements IJobQueue {
 	@PostConstruct
 	private void init() {
 		String acksMode = "-1";
+		if (acksMode == null) {
+			acksMode = defaultAcksMode;
+		}
 
 		String prodTimeOut = "5";
 		if (prodTimeOut != null) {
@@ -93,7 +95,7 @@ public class KafkaJobProducer implements IJobQueue {
 
 		logger.debug("Initializing Kafka Queue Producer...");
 
-		brokerList = environment.getProperty(ApplicationConstants.KAFKA_BROKERS);
+		brokerList = "localhost:9092";
 		logger.debug("Kafka broker list : {}", brokerList);
 
 		kafkaProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerList);
@@ -104,13 +106,20 @@ public class KafkaJobProducer implements IJobQueue {
 		logger.info("Kafka producer created successfully with ackmode : {}", acksMode);
 	}
 
-		@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.yodlee.pengine.web.service.IJobQueue#submitJob(com.yodlee.pengine.entity.
+	 * JobEntity)
+	 */
+	@Override
 	public boolean produceJob(Event event) {
 		boolean rslt = false;
 		try {
 			// initialize the kafka producer
 			// producer = new KafkaProducer<String, String>(kafkaProperties);
-			String jobTopicName = environment.getProperty(ApplicationConstants.KAFKA_TOPIC);
+			String jobTopicName = "ANALYTICS_INGEST";
 			String queueRequest = objectMapper.writeValueAsString(event);
 			logger.debug("Adding job request to queue {} - {}", jobTopicName, queueRequest);
 
