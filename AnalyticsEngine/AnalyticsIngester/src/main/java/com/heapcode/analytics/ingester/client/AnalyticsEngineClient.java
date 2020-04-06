@@ -39,6 +39,9 @@ public class AnalyticsEngineClient {
 	/**
 	 * @param args
 	 */
+	/*
+	 * Scheduler based Ingester which hits the GitHub API every 10 seconds and fetches the data.
+	 */
 	@Scheduled(fixedDelay = 10000)
 	public void ingestData() {
 		String url = environment.getProperty(ApplicationConstants.DATA_END_POINT)+"?client_id="+environment.getProperty(ApplicationConstants.CLIENT_ID)+"&client_secret="+environment.getProperty(ApplicationConstants.CLIENT_SECRET);

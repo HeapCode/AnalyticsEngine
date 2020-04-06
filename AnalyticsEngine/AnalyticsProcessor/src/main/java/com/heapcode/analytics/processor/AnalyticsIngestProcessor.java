@@ -19,6 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heapcode.analytics.SlidingWindowQueue;
 import com.heapcode.analytics.pojo.Event;
 
+/**
+ * @author Manjunath Sampath
+ *
+ */
 @Component
 @Scope("prototype")
 public class AnalyticsIngestProcessor implements Processor<String, String> {

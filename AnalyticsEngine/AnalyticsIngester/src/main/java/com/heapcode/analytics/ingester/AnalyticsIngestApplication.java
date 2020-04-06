@@ -11,6 +11,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.heapcode.analytics.ingester.client.AnalyticsEngineClient;
 
+/**
+ * @author Manjunath Sampath
+ *
+ */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = { "com.heapcode.analytics"})

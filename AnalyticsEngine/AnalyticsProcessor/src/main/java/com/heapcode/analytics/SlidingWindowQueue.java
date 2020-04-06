@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.heapcode.analytics;
 
 import java.time.Instant;
@@ -25,21 +22,25 @@ import org.slf4j.LoggerFactory;
 import com.heapcode.analytics.pojo.Commit;
 import com.heapcode.analytics.pojo.Event;
 
+/**
+ * @author Manjunath Sampath
+ *
+ */
 public class SlidingWindowQueue {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AnalyticsProcessorApplication.class);
 
-	static String commitMessage = "";
+	private static String commitMessage = "";
 
-	private static Queue<Event> fifo = new CircularFifoQueue<Event>(10);
+	private static Queue<Event> fifo = new CircularFifoQueue<Event>(10); //This circular Fifo Queue is our data structure for Sliding Window
 
 	private static Map<String, Integer> stringCountMap = new HashMap<>();
 	private static Map<Integer, Integer> commitHourCountMap = new HashMap<>();
 
 	public static void addEvaluateEvent(Event event) {
-		fifo.add(event);
-		stringCountMap.clear();
-		commitHourCountMap.clear();
+		fifo.add(event); //add an event to the Fifo Queue
+		stringCountMap.clear(); //clear count map to re-evaluate
+		commitHourCountMap.clear(); //clear commit hour map to re-evaluate
 		evaluateSlidingWindowQueue();
 	}
 
@@ -57,8 +58,9 @@ public class SlidingWindowQueue {
 
 			Set<Entry<Integer, Integer>> hourEntrySetSortedByValue = getSortedCommitHourEntrySet();
 			Entry<Integer, Integer> topEntry = hourEntrySetSortedByValue.iterator().next();
-			
-			LOGGER.error("########### Most popular hour of commit is for the last 10 commits is {} hours as per IST.",topEntry.getKey());
+
+			LOGGER.error("########### Most popular hour of commit is for the last 10 commits is {} hours as per IST.",
+					topEntry.getKey());
 			List<Commit> commits = event.getPayload().getCommits();
 			for (Iterator<Commit> iterator2 = commits.iterator(); iterator2.hasNext();) {
 				Commit commit = (Commit) iterator2.next();
@@ -70,9 +72,9 @@ public class SlidingWindowQueue {
 					} else {
 						stringCountMap.put(messageStrings[i], 1);
 					}
-				}				
+				}
 				LinkedHashMap<String, Integer> sortedByValue = getSortedCommitCountEntrySet();
-				
+
 				LOGGER.error("########### Printing the most frequently  used words in the last 10 Commits.");
 				Set<Entry<String, Integer>> entrySetSortedByValue = sortedByValue.entrySet();
 				int i = 1;

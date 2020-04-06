@@ -22,6 +22,10 @@ import org.springframework.core.env.Environment;
 
 import com.heapcode.analytics.processor.AnalyticsIngestProcessor;
 
+/**
+ * @author Manjunath Sampath
+ *
+ */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = { "com.heapcode.analytics" })

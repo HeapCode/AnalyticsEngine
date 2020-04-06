@@ -35,7 +35,7 @@ import com.heapcode.analytics.pojo.Event;
 public class KafkaJobProducer implements IJobQueue {
 	private static final Logger logger = LoggerFactory.getLogger(KafkaJobProducer.class);
 	private static int producerTimeOut = 5; // default value
-	
+
 	@Autowired
 	Environment environment;
 

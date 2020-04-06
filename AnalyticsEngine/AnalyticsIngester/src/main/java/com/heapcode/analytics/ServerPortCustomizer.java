@@ -7,6 +7,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import static com.heapcode.analytics.ApplicationConstants.INGEST_APP_PORT;;
 
+/**
+ * @author Manjunath Sampath
+ *
+ */
 @Component
 public class ServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
 

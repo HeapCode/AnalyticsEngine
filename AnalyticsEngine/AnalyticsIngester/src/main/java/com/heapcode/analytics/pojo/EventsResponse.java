@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author msampath
+ * @author Manjunath Sampath
  *
  */
 public class EventsResponse implements Serializable {

@@ -1,7 +1,7 @@
 package com.heapcode.analytics;
 
 /**
- * @author msampath
+ * @author Manjunath Sampath
  *
  */
 import java.text.ParseException;

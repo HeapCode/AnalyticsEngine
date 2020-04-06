@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2020 Yodlee, Inc. All Rights Reserved.
- *
- * This software is the confidential and proprietary information of Yodlee, Inc. Use is subject to license terms.
- */
 package com.heapcode.analytics;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +7,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import static com.heapcode.analytics.ApplicationConstants.PROCESS_APP_PORT;
 
+/**
+ * @author Manjunath Sampath
+ *
+ */
 @Component
 public class ServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
 
