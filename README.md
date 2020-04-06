@@ -37,9 +37,9 @@ This project is for the AnalyticsEngine
 - Clone or download the Analytics Engine
 - go the root project AnalyticsEngine\AnalyticsIngester\src\main\resources\application.properties
 - Set the client_id and client_secret values for com.heapcode.anlaytics.rep.client_id and com.heapcode.anlaytics.rep.client_secret respectively
-- go the root project AnalyticsEngine
+- go the root project AnalyticsEngine and run the below command to build the project
 
-`$ run mvn clean install`
+`$ mvn clean install`
 - once the build is completed successfully you will have 2 jar files they are
 - IngesterApp which is located at AnalyticsEngine\AnalyticsIngester\target\AnalyticsIngester-1.0.jar
 - ProcessorrApp which is located at AnalyticsEngine\AnalyticsProcessor\target\AnalyticsProcessor-1.0.jar
