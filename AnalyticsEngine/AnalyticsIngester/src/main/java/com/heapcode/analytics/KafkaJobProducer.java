@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heapcode.analytics.pojo.Event;
 
 /**
- * Kafka based Job queue to be used for queuing jobs.
+ * Kafka based Event queue to be used for queuing events.
  * 
  * @author Manjunath Sampath
  */
@@ -104,20 +104,20 @@ public class KafkaJobProducer implements IJobQueue {
 		logger.info("Kafka producer created successfully with ackmode : {}", acksMode);
 	}
 
-		@Override
+	@Override
 	public boolean produceJob(Event event) {
 		boolean rslt = false;
 		try {
 			// initialize the kafka producer
 			// producer = new KafkaProducer<String, String>(kafkaProperties);
-			String jobTopicName = environment.getProperty(ApplicationConstants.KAFKA_TOPIC);
+			String eventTopicName = environment.getProperty(ApplicationConstants.KAFKA_TOPIC);
 			String queueRequest = objectMapper.writeValueAsString(event);
-			logger.debug("Adding job request to queue {} - {}", jobTopicName, queueRequest);
+			logger.debug("Adding job request to queue {} - {}", eventTopicName, queueRequest);
 
-			ProducerRecord<String, String> rec = new ProducerRecord<String, String>(jobTopicName, queueRequest);
+			ProducerRecord<String, String> rec = new ProducerRecord<String, String>(eventTopicName, queueRequest);
 			producer.send(rec).get(producerTimeOut, TimeUnit.SECONDS);
 
-			logger.debug("Submitted event to kafka topic {}", jobTopicName);
+			logger.debug("Submitted event to kafka topic {}", eventTopicName);
 			rslt = true;
 
 		} catch (JsonProcessingException ex) {
